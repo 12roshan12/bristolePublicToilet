@@ -6,7 +6,7 @@ var marker
 var popup
 let cordinate1
 let cordinate2
-var myDiv 
+var myDiv
 
 function onMapClick(e) {
     alert("You clicked the map at " + e.latlng);
@@ -28,8 +28,54 @@ fetch(
         navigator.geolocation.getCurrentPosition(successCallback);
     });
 
+document.addEventListener('click', (data) => {
+
+
+    let el = data.srcElement
+    let clasname = el.classList[0]
+    console.log(clasname);
+    if (clasname?.startsWith('infoDiv')) {
+        document.getElementsByClassName('pop-div')[0].style.display = 'block';
+        let extracedData = geoData[+clasname.slice(-1)]
+        let element = document.getElementsByClassName('pop-div')
+        let div = document.createElement('div');
+        div.style = "dispaly:block;width:auto;background:white;position:absolute;top:25%;left:25%;z-index:99999"
+        div.innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:10px;padding:40px;">
+        <div style="cursor:pointer;">
+           <span >
+           <img class="close-button"
+           src="https://banner2.cleanpng.com/20180422/uve/kisspng-computer-icons-clip-art-5adc80ddcfdd16.3997119115244003498514.jpg" style="width:20px;height:20px;"
+         /> Back
+           </span> 
+        </div>
+        <div>Toilet Name: ${extracedData.fields.toilet_name}</div>
+        <div>Address: ${extracedData.fields.address}</div>
+        <div>Opening Hours: ${extracedData.fields.opening}</div>
+        <div>Ward: ${extracedData.fields.ward}</div>
+        <div>Postal Code: ${extracedData.fields.postcode}</div>
+        <div>Disatnce form current Location: ${extracedData.distance} KM</div>
+        </div>
+        `
+        element[0].append(div)
+    }
+
+    if (clasname?.startsWith('close-button')) {
+        document.getElementsByClassName('pop-div')[0].style.display = 'none';
+    }
+
+    if (clasname?.startsWith('mapDiv')) {
+        console.log("ddddd")
+        let extracedData = geoData[+clasname.slice(-1)]
+
+        popup = L.popup()
+            .setLatLng([extracedData.fields.geo_shape.coordinates[1], extracedData.fields.geo_shape.coordinates[0]])
+            .setContent(extracedData.fields.address)
+            popup.openOn(map);
+    }
+})
+
 function setDiv() {
-    console.log(currentPosition)
     let container = document.getElementsByClassName('body-list');
     geoData = geoData.map(data => {
         cordinate1 = {
@@ -68,15 +114,14 @@ function setDiv() {
         <div class="facility-body">
           <span> Open:${geoData[i].fields.opening} </span>
           <span>${geoData[i].fields.address}</span>
-          <span style="color: blue;text-decoration:underline;cursor:pointer;" id=myDiv" > More Information </span>
+          <span style="color: blue;text-decoration:underline;cursor:pointer;" class="infoDiv${i}" >More Information </span>
+          <span style="color: blue;text-decoration:underline;cursor:pointer;" class="mapDiv${i}" >View On Map </span>
       </div>`;
         container[0].appendChild(div);
-
-        // myDiv = document.querySelector('#myDiv');
-        // myDiv.addEventListener('click', function () {
-        //     console.log('The div was clicked!');
-        // });
     }
+
+
+
     map = L.map('map').setView([cordinate1.lat, cordinate1.lon], 13);
     marker = L.marker([cordinate1.lat, cordinate1.lon]).addTo(map);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -88,6 +133,9 @@ function setDiv() {
         .setContent("Current Location")
     marker.bindPopup(popup).openPopup();
     map.on('click', onMapClick);
+
+
+
 
     for (var i = 0; i < geoData.length; i++) {
         var redIcon = L.icon({
@@ -103,7 +151,6 @@ function setDiv() {
         marker.bindPopup(popup);
     }
 
-    
 
 }
 
@@ -132,4 +179,3 @@ function getDistanceBetweenTwoPoints(cord1, cord2) {
     dist = dist * 1.609344; //convert miles to km
     return dist;
 }
-

@@ -1,5 +1,6 @@
 body{
     height:90vh;
+    position: relative;
   }
   
   .page-body {
@@ -66,3 +67,9 @@ body{
     gap: 10px;
   }
   
+  .pop-div{
+    display: hidden;
+  }
+  .hideDiv{
+    display:hidden !important;
+  }
