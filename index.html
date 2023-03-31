@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <title>Bristole Map</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+</head>
+
+<body>
+
+    <div class="page-head">
+        <div>
+            <h1>Bristole Public Toilet Maps</h1>
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="side-section">
+            <div>
+                <h3>Facilities nearby</h3>
+                <p>
+                    Based upon your current location, here are some facility nearby.
+                </p>
+            </div>
+
+            <div class="body-description">
+                <div class="body-list">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <!-- <iframe src="https://opendata.bristol.gov.uk/explore/embed/dataset/public-toilets-community/map/?location=13,51.44031,-2.58986&basemap=jawg.streets&static=false&datasetcard=false&scrollWheelZoom=false" width="100%" height="100%" frameborder="0"></iframe> -->
+            <div id="map"></div>
+        </div>
+    </div>
+</body>
+<script src="/script.js" defer></script>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+</html>

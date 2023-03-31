@@ -1,0 +1,68 @@
+body{
+    height:90vh;
+  }
+  
+  .page-body {
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    height:100%
+  }
+
+  #map { height: 100% }
+
+  .body-description{
+    padding: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .map-section {
+    flex: 1;
+  }
+  .side-section{
+    flex: 0;
+  }
+  
+  .facility-list {
+    background: rgb(203, 209, 204);
+    padding: 10px 20px;
+    min-width: 500px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  .facility-list:hover {
+    background: rgb(169, 193, 207);
+  }
+  
+  .facility-image {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .facility-list-sub {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .facility-head {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .facility-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .body-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
